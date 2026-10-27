@@ -35,11 +35,15 @@ class ErrorBoundary extends React.Component {
 function App() {
   const { data } = useQuery({
     queryKey: ["portfolio"],
-    queryFn: async () => (await axios.get(`${API}/portfolio`)).data,
-    retry: 2,
+    queryFn: async () => {
+      if (!process.env.REACT_APP_BACKEND_URL) return FALLBACK_PORTFOLIO;
+      const res = await axios.get(`${API}/portfolio`);
+      return res.data;
+    },
+    retry: false,
     staleTime: 5 * 60_000,
   });
-  const portfolio = data ?? FALLBACK_PORTFOLIO;
+  const portfolio = (data && data.profile) ? data : FALLBACK_PORTFOLIO;
 
   useEffect(() => {
     const lenis = new Lenis({ duration: 1.15, smoothWheel: true });

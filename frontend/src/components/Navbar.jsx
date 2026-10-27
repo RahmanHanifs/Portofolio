@@ -10,13 +10,15 @@ const LINKS = [
   { label: "Contact", href: "#contact" },
 ];
 
-export default function Navbar({ profile }) {
+export default function Navbar({ profile = {} }) {
   const [open, setOpen] = useState(false);
 
   const go = (href) => {
     setOpen(false);
     scrollToId(href);
   };
+
+  const firstName = profile?.first_name || "Hanif";
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 px-4 pt-4">
@@ -30,7 +32,7 @@ export default function Navbar({ profile }) {
             H.
           </span>
           <span className="font-display font-bold text-lg tracking-tight hidden sm:block">
-            {profile.first_name}
+            {firstName}
             <span className="text-brand">.data</span>
           </span>
         </button>
