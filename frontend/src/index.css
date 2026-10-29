@@ -2,112 +2,206 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Portfolio design system.
+ * Light = original mint/teal palette.
+ * Dark  = cyberpunk night: midnight blue, lavender text,
+ *         light-sky-blue data accents, medium-orchid neon highlights.
+ */
+
+/* ─── Design tokens ──────────────────────────────────────── */
 :root {
-    --mint: #F0FDF4;
-    --mint-deep: #DCFCE7;
-    --ink: #052E2B;
-    --teal: #0D9488;
-    --emerald: #10B981;
-    --lime: #A3E635;
-    --pop: #CCFF00;
-    --cardark: #062F2C;
+  --radius: 0.75rem;
+  --mint: oklch(0.982 0.018 155.8);
+  --mint-deep: oklch(0.962 0.044 156.7);
+  --ink: oklch(0.262 0.048 183);
+  --brand: oklch(0.6 0.118 184.7);
+  --emerald: oklch(0.696 0.17 162.5);
+  --lime: oklch(0.841 0.238 128.9);
+  --pop: oklch(0.93 0.23 125);
+  --lemon: oklch(0.938 0.127 124.3);
+  --surface: oklch(1 0 0);
+  --surface-alt: oklch(0.965 0.017 158);
+  --line: oklch(0.262 0.048 183);
+  --panel: oklch(0.262 0.048 183);
+  --panel-fg: oklch(0.982 0.018 155.8);
+  --on-accent: oklch(0.262 0.048 183);
+
+  --shadow-soft: 0 18px 48px -18px color-mix(in oklab, var(--ink) 22%, transparent);
+  --grid-line: transparent;
 }
 
+/* ─── Dark / Cyberpunk theme ─────────────────────────────── */
+.dark {
+  --mint: oklch(0.15 0.045 285);        /* night sky */
+  --mint-deep: oklch(0.27 0.085 286);   /* Midnight Blue */
+  --ink: oklch(0.894 0.04 293);         /* Lavender */
+  --brand: oklch(0.8 0.11 232);         /* Light Sky Blue */
+  --emerald: oklch(0.68 0.16 272);      /* Royal Blue */
+  --lime: oklch(0.66 0.22 316);         /* Medium Orchid */
+  --pop: oklch(0.76 0.19 328);          /* hot orchid neon */
+  --lemon: oklch(0.58 0.18 272);        /* Royal Blue */
+  --surface: oklch(0.2 0.06 285);
+  --surface-alt: oklch(0.22 0.07 285);
+  --line: oklch(0.894 0.04 293);
+  --panel: oklch(0.115 0.04 285);
+  --panel-fg: oklch(0.894 0.04 293);
+  --on-accent: oklch(0.13 0.04 285);
+
+  --shadow-soft:
+    0 0 0 1px color-mix(in oklab, var(--lime) 14%, transparent),
+    0 20px 60px -20px color-mix(in oklab, var(--brand) 35%, transparent);
+  --grid-line: color-mix(in oklab, var(--brand) 7%, transparent);
+  color-scheme: dark;
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    margin: 0;
-    font-family: "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--mint);
-    color: var(--ink);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: clip;
+  margin: 0;
+  font-family: "Schibsted Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--mint);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 ::selection {
-    background: var(--pop);
-    color: var(--ink);
+  background: var(--pop);
+  color: var(--on-accent);
 }
 
+/* ─── Tailwind colour helpers (CSS-var based) ────────────── */
+.bg-mint        { background: var(--mint); }
+.bg-mint-deep   { background: var(--mint-deep); }
+.bg-surface     { background: var(--surface); }
+.bg-surface-alt { background: var(--surface-alt); }
+.bg-panel       { background: var(--panel); }
+.bg-lime        { background: var(--lime); }
+.bg-lemon       { background: var(--lemon); }
+.bg-brand       { background: var(--brand); }
+.bg-ink         { background: var(--ink); }
+
+.text-ink       { color: var(--ink); }
+.text-brand     { color: var(--brand); }
+.text-lime      { color: var(--lime); }
+.text-pop       { color: var(--pop); }
+.text-lemon     { color: var(--lemon); }
+.text-mint      { color: var(--mint); }
+.text-panel-fg  { color: var(--panel-fg); }
+.text-on-accent { color: var(--on-accent); }
+.text-emerald   { color: var(--emerald); }
+
+.border-line    { border-color: var(--line); }
+
+/* ─── Cyberpunk backdrop (dark mode only) ────────────────── */
+.cyber-bg {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.dark .cyber-bg::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(40rem 28rem at 88% 8%, color-mix(in oklab, var(--lime) 16%, transparent), transparent 70%),
+    radial-gradient(36rem 30rem at 5% 55%, color-mix(in oklab, var(--brand) 11%, transparent), transparent 70%);
+}
+.dark .cyber-bg > * {
+  position: relative;
+  z-index: 1;
+}
+.dark .cyber-bg > header {
+  position: fixed;
+  z-index: 50;
+}
+
+/* ─── Neon details in dark mode ─────────────────────────── */
+.dark .bg-panel {
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--lime) 22%, transparent);
+}
+.dark .text-brand {
+  text-shadow: 0 0 18px color-mix(in oklab, var(--brand) 45%, transparent);
+}
+.dark .text-lime,
+.dark .text-pop {
+  text-shadow: 0 0 20px color-mix(in oklab, var(--lime) 55%, transparent);
+}
+.dark .bg-lime {
+  box-shadow: 0 0 24px -4px color-mix(in oklab, var(--lime) 70%, transparent);
+}
+
+/* ─── Shadow utility ─────────────────────────────────────── */
+.shadow-soft { box-shadow: var(--shadow-soft); }
+
+/* ─── Grain overlay ──────────────────────────────────────── */
 .grain::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 60;
-    pointer-events: none;
-    opacity: 0.05;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.dark .grain::before {
+  opacity: 0.07;
 }
 
+/* ─── Text stroke ────────────────────────────────────────── */
 .text-stroke {
-    -webkit-text-stroke: 1.5px rgba(5, 46, 43, 0.35);
-    color: transparent;
+  -webkit-text-stroke: 1.5px color-mix(in oklab, var(--ink) 35%, transparent);
+  color: transparent;
+}
+.dark .text-stroke {
+  -webkit-text-stroke: 1.5px color-mix(in oklab, var(--lime) 70%, transparent);
+  filter: drop-shadow(0 0 10px color-mix(in oklab, var(--lime) 40%, transparent));
 }
 
+/* ─── Marquee ────────────────────────────────────────────── */
 .marquee {
-    overflow: hidden;
-    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
-
 .marquee-track {
-    display: flex;
-    width: max-content;
-    animation: marquee var(--marquee-duration, 32s) linear infinite;
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 32s) linear infinite;
 }
-
 .marquee:hover .marquee-track {
-    animation-play-state: paused;
+  animation-play-state: paused;
 }
-
 .marquee-group {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
-
 @keyframes marquee {
-    to {
-        transform: translateX(-50%);
-    }
+  to { transform: translateX(-50%); }
 }
 
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
+/* ─── Scrollbar ──────────────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
 
-.no-scrollbar {
-    scrollbar-width: none;
-}
-
+/* ─── Animations ─────────────────────────────────────────── */
 @keyframes floaty {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
 }
-
-.animate-floaty {
-    animation: floaty 5s ease-in-out infinite;
-}
+.animate-floaty { animation: floaty 5s ease-in-out infinite; }
 
 @keyframes pulse-dot {
-    0%,
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.6);
-        opacity: 0.55;
-    }
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.6); opacity: 0.55; }
 }
-
-.animate-pulse-dot {
-    animation: pulse-dot 1.8s ease-in-out infinite;
-}
+.animate-pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }

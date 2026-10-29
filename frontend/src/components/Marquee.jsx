@@ -15,24 +15,39 @@ const ICONS = {
   Git: GitBranch,
 };
 
-const Group = ({ items, iconStyle, labelStyle }) =>
+const Group = ({ items }) =>
   items.map((t) => {
     const Icon = ICONS[t] || Sparkles;
     return (
-      <span key={t} className="marquee-item flex items-center gap-2.5 rounded-full border border-emerald-900/12 bg-white/85 px-5 py-2.5 shadow-sm mx-2.5">
-        <Icon size={17} className={iconStyle} />
-        <span className={`font-mono text-xs font-medium tracking-wide ${labelStyle}`}>{t}</span>
+      <span
+        key={t}
+        className="marquee-item flex items-center gap-2.5 rounded-full px-5 py-2.5 shadow-sm mx-2.5"
+        style={{
+          border: "1px solid color-mix(in oklab, var(--line) 12%, transparent)",
+          background: "color-mix(in oklab, var(--surface) 85%, transparent)",
+        }}
+      >
+        <Icon size={17} className="text-brand" />
+        <span className="font-mono text-xs font-medium tracking-wide" style={{ color: "color-mix(in oklab, var(--ink) 75%, transparent)" }}>{t}</span>
       </span>
     );
   });
 
 export const ToolsMarquee = ({ tools }) => (
-  <section className="py-8 border-y border-emerald-900/10 bg-mint-deep/40" data-testid="tools-marquee">
+  <section
+    className="py-8"
+    style={{
+      borderTop: "1px solid color-mix(in oklab, var(--line) 10%, transparent)",
+      borderBottom: "1px solid color-mix(in oklab, var(--line) 10%, transparent)",
+      background: "color-mix(in oklab, var(--mint-deep) 40%, transparent)",
+    }}
+    data-testid="tools-marquee"
+  >
     <div className="marquee">
       <div className="marquee-track" style={{ "--marquee-duration": "30s" }}>
         {[0, 1].map((copy) => (
           <div key={copy} aria-hidden={copy === 1} className="marquee-group">
-            <Group items={tools} iconStyle="text-brand" labelStyle="text-emerald-950/75" />
+            <Group items={tools} />
           </div>
         ))}
       </div>
@@ -41,7 +56,11 @@ export const ToolsMarquee = ({ tools }) => (
 );
 
 export const WordsMarquee = ({ words }) => (
-  <section className="py-14 border-t border-emerald-900/10 overflow-hidden" data-testid="words-marquee">
+  <section
+    className="py-14 overflow-hidden"
+    style={{ borderTop: "1px solid color-mix(in oklab, var(--line) 10%, transparent)" }}
+    data-testid="words-marquee"
+  >
     <div className="marquee">
       <div className="marquee-track" style={{ "--marquee-duration": "46s" }}>
         {[0, 1].map((copy) => (

@@ -43,8 +43,9 @@ function App() {
     retry: false,
     staleTime: 5 * 60_000,
   });
-  const portfolio = (data && data.profile) ? data : FALLBACK_PORTFOLIO;
+  const portfolio = data && data.profile ? data : FALLBACK_PORTFOLIO;
 
+  // Smooth scroll via Lenis
   useEffect(() => {
     const lenis = new Lenis({ duration: 1.15, smoothWheel: true });
     window.__lenis = lenis;
@@ -61,9 +62,16 @@ function App() {
     };
   }, []);
 
+  // Apply saved or default (dark) theme on first render
+  useEffect(() => {
+    const saved = (() => { try { return localStorage.getItem("portfolio-theme"); } catch { return null; } })();
+    const useDark = saved ? saved === "dark" : true;
+    document.documentElement.classList.toggle("dark", useDark);
+  }, []);
+
   return (
     <ErrorBoundary>
-      <div className="grain relative min-h-screen bg-mint text-ink overflow-x-clip">
+      <div className="grain cyber-bg relative min-h-screen bg-mint text-ink overflow-x-clip">
         <Navbar profile={portfolio.profile} />
         <main>
           <Hero profile={portfolio.profile} socials={portfolio.socials} />

@@ -7,7 +7,6 @@ import ChartWidget from "@/components/ChartWidget";
 const SOCIALS = ["LinkedIn", "GitHub", "Kaggle", "Instagram"];
 
 export default function Hero({ profile, socials }) {
-
   const rxRaw = useMotionValue(0);
   const ryRaw = useMotionValue(0);
   const rx = useSpring(rxRaw, { stiffness: 160, damping: 18 });
@@ -30,18 +29,27 @@ export default function Hero({ profile, socials }) {
 
   return (
     <section id="top" className="relative pt-32 md:pt-40 pb-16 overflow-hidden">
-      <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full bg-lemon/60 blur-3xl pointer-events-none" />
-      <div className="absolute top-64 -left-32 w-[420px] h-[420px] rounded-full bg-emerald-200/50 blur-3xl pointer-events-none" />
+      <div className="absolute -top-32 -right-24 w-[480px] h-[480px] rounded-full blur-3xl pointer-events-none" style={{ background: "color-mix(in oklab, var(--lemon) 60%, transparent)" }} />
+      <div className="absolute top-64 -left-32 w-[420px] h-[420px] rounded-full blur-3xl pointer-events-none" style={{ background: "color-mix(in oklab, var(--mint-deep) 50%, transparent)" }} />
 
       <div className="relative mx-auto max-w-6xl px-5 grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-8 items-center">
         <motion.div variants={stagger} initial="hidden" animate="show">
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-emerald-900/15 bg-white/80 px-3.5 py-1.5 mb-6">
+          <motion.div
+            variants={fadeUp}
+            className="inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 mb-6"
+            style={{
+              border: "1px solid color-mix(in oklab, var(--line) 15%, transparent)",
+              background: "color-mix(in oklab, var(--surface) 80%, transparent)",
+            }}
+          >
             <span className="w-2 h-2 rounded-full bg-lime animate-pulse-dot" data-testid="hero-availability-dot" />
-            <span className="font-mono text-[11px] uppercase tracking-widest text-emerald-900/80">{profile.availability}</span>
+            <span className="font-mono text-[11px] uppercase tracking-widest" style={{ color: "color-mix(in oklab, var(--ink) 80%, transparent)" }}>
+              {profile.availability}
+            </span>
           </motion.div>
 
           <motion.p variants={fadeUp} className="font-mono text-sm text-brand mb-3">
-            Hello, it's me {profile.first_name} 
+            Hello, it's me {profile.first_name}
           </motion.p>
 
           <h1 className="font-display font-extrabold tracking-tight leading-[0.98] text-[clamp(2.6rem,7vw,4.9rem)]">
@@ -76,7 +84,7 @@ export default function Hero({ profile, socials }) {
                   >
                     <motion.path
                       d="M4 8 C 60 2, 160 2, 216 7"
-                      stroke="#A3E635"
+                      style={{ stroke: "var(--lime)" }}
                       strokeWidth="5"
                       strokeLinecap="round"
                       initial={{ pathLength: 0 }}
@@ -89,7 +97,7 @@ export default function Hero({ profile, socials }) {
             </span>
           </h1>
 
-          <motion.p variants={fadeUp} className="mt-6 max-w-xl text-emerald-950/70 text-base md:text-lg leading-relaxed">
+          <motion.p variants={fadeUp} className="mt-6 max-w-xl text-base md:text-lg leading-relaxed" style={{ color: "color-mix(in oklab, var(--ink) 70%, transparent)" }}>
             {profile.intro}
           </motion.p>
 
@@ -97,14 +105,22 @@ export default function Hero({ profile, socials }) {
             <button
               data-testid="hero-cta-projects"
               onClick={() => scrollToId("#projects")}
-              className="inline-flex items-center gap-2 rounded-full bg-ink text-mint px-6 py-3 text-sm font-semibold hover:bg-brand hover:-translate-y-0.5 transition-all shadow-[0_10px_24px_rgba(5,46,43,0.18)]"
+              className="inline-flex items-center gap-2 rounded-full bg-panel text-panel-fg px-6 py-3 text-sm font-semibold hover:-translate-y-0.5 transition-all shadow-soft"
+              onMouseEnter={(e) => (e.currentTarget.style.background = "var(--brand)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "")}
             >
               Explore Projects <TrendingUp size={16} />
             </button>
             <button
               data-testid="hero-copy-email"
               onClick={() => copyEmail(profile.email, toast)}
-              className="inline-flex items-center gap-2 rounded-full bg-white/85 border border-emerald-900/15 px-6 py-3 text-sm font-semibold hover:bg-lemon hover:-translate-y-0.5 transition-all"
+              className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold hover:-translate-y-0.5 transition-all"
+              style={{
+                background: "color-mix(in oklab, var(--surface) 85%, transparent)",
+                border: "1px solid color-mix(in oklab, var(--line) 15%, transparent)",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "var(--lemon)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "color-mix(in oklab, var(--surface) 85%, transparent)")}
             >
               <Copy size={15} /> Copy Email
             </button>
@@ -118,7 +134,8 @@ export default function Hero({ profile, socials }) {
                 href={socialUrl(s)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono text-[11px] uppercase tracking-[0.18em] text-emerald-950/60 hover:text-brand transition-colors"
+                className="font-mono text-[11px] uppercase tracking-[0.18em] hover:text-brand transition-colors"
+                style={{ color: "color-mix(in oklab, var(--ink) 60%, transparent)" }}
               >
                 {s}
               </a>
@@ -126,7 +143,8 @@ export default function Hero({ profile, socials }) {
             <a
               data-testid="hero-social-email"
               href={`mailto:${profile.email}`}
-              className="font-mono text-[11px] uppercase tracking-[0.18em] text-emerald-950/60 hover:text-brand transition-colors"
+              className="font-mono text-[11px] uppercase tracking-[0.18em] hover:text-brand transition-colors"
+              style={{ color: "color-mix(in oklab, var(--ink) 60%, transparent)" }}
             >
               Email
             </a>
@@ -146,12 +164,23 @@ export default function Hero({ profile, socials }) {
             <ChartWidget />
           </motion.div>
 
-          <div className="animate-floaty absolute -left-3 sm:-left-8 -top-6 rounded-2xl border border-emerald-900/10 bg-white px-4 py-2.5 shadow-[0_14px_34px_rgba(5,46,43,0.14)]">
+          <div
+            className="animate-floaty absolute -left-3 sm:-left-8 -top-6 rounded-2xl px-4 py-2.5 shadow-soft"
+            style={{
+              border: "1px solid color-mix(in oklab, var(--line) 10%, transparent)",
+              background: "var(--surface)",
+            }}
+          >
             <span className="font-mono text-xs font-bold text-ink">&lt;/&gt; SQL</span>
           </div>
-          <div className="animate-floaty absolute -right-2 sm:-right-6 -bottom-7 rounded-2xl bg-ink text-mint px-4 py-3 shadow-[0_14px_34px_rgba(5,46,43,0.22)]" style={{ animationDelay: "1.2s" }}>
+          <div
+            className="animate-floaty absolute -right-2 sm:-right-6 -bottom-7 rounded-2xl bg-panel text-panel-fg px-4 py-3 shadow-soft"
+            style={{ animationDelay: "1.2s" }}
+          >
             <span className="font-display text-lg font-bold text-lime">25+</span>
-            <span className="block font-mono text-[10px] uppercase tracking-widest text-mint/70">Dashboards built</span>
+            <span className="block font-mono text-[10px] uppercase tracking-widest" style={{ color: "color-mix(in oklab, var(--panel-fg) 70%, transparent)" }}>
+              Dashboards built
+            </span>
           </div>
         </motion.div>
       </div>
@@ -159,7 +188,8 @@ export default function Hero({ profile, socials }) {
       <button
         data-testid="hero-scroll-down"
         onClick={() => scrollToId("#about")}
-        className="absolute bottom-5 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1 font-mono text-[10px] uppercase tracking-[0.2em] text-emerald-950/50 hover:text-brand transition-colors"
+        className="absolute bottom-5 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-1 font-mono text-[10px] uppercase tracking-[0.2em] hover:text-brand transition-colors"
+        style={{ color: "color-mix(in oklab, var(--ink) 50%, transparent)" }}
       >
         Scroll Down
         <ArrowDown size={14} className="animate-bounce" />
