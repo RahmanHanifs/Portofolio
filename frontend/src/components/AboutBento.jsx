@@ -134,7 +134,7 @@ export default function AboutBento({ portfolio }) {
               <h3 className="mt-2 font-display text-3xl md:text-4xl font-bold tracking-tight">
                 Have data? <span className="text-lime">Let's make it talk.</span>
               </h3>
-              <p className="mt-2 text-sm md:text-base" style={{ color: "color-mix(in oklab, var(--panel-fg) 70%, transparent)" }}>No forms, no friction — grab my email and say hi.</p>
+              <p className="mt-2 text-sm md:text-base" style={{ color: "color-mix(in oklab, var(--panel-fg) 70%, transparent)" }}>No forms, no friction grab my email and say hi.</p>
             </div>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <button

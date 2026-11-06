@@ -80,7 +80,7 @@ export default function Projects({ projects }) {
             </div>
           </div>
           <p className="mt-3 max-w-xl" style={{ color: "color-mix(in oklab, var(--ink) 70%, transparent)" }}>
-            A curated set of analyses — from marketing strategy to churn models — presented the way I'd present them to a stakeholder.
+            A curated set of analyses from marketing strategy to churn models, I presented the way I'd present them to a stakeholder.
           </p>
         </motion.div>
       </div>
