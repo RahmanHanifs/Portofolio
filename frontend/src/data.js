@@ -11,10 +11,10 @@ export const FALLBACK_PORTFOLIO = {
     photo: "/profile.jpg",
   },
   socials: [
-    { label: "LinkedIn", url: "https://linkedin.com/in/hanifaji" },
-    { label: "GitHub", url: "https://github.com/hanifaji" },
+    { label: "LinkedIn", url: "https://www.linkedin.com/in/rahman-hanif-aji-s/" },
+    { label: "GitHub", url: "https://github.com/Rahmanhanifs" },
     { label: "Kaggle", url: "https://kaggle.com/hanifaji" },
-    { label: "Instagram", url: "https://instagram.com/hanif.data" },
+    { label: "Instagram", url: "https://instagram.com/Rahman_hanf" },
     { label: "Email", url: "mailto:hanifaji26@gmail.com" },
   ],
   stats: [
@@ -35,7 +35,8 @@ export const FALLBACK_PORTFOLIO = {
       degree: "Ai Engineering",
       school: "DBS Foundation X Dicoding",
       period: "2026",
-      detail: "6 months of intensive training in AI and machine learning, covering topics such as deep learning, computer vision, and natural language processing.",
+      detail:
+        "6 months of intensive training in AI and machine learning, covering topics such as deep learning, computer vision, and natural language processing.",
     },
   ],
   tools: [
@@ -137,35 +138,24 @@ export const FALLBACK_PORTFOLIO = {
         "Developed a web application for internal use, to improving workflow efficiency",
         "Creating dashboard to visualize data from procurement and room booking",
       ],
-      tools: ["Excel", "SQL", "Tableau"],
+      tools: ["Excel", "SQL", "Laravel", "Data Visualization"],
     },
   ],
   certifications: [
     {
-      title: "Google Data Analytics Professional Certificate",
-      issuer: "Google",
+      title: "Ai Engineering",
+      issuer: "DBS Foundation X Dicoding",
+      year: "2026",
+    },
+    {
+      title: "Cloud Computing Alibaba Cloud",
+      issuer: "Alibaba Cloud",
       year: "2024",
     },
     {
-      title: "Microsoft Power BI Data Analyst (PL-300)",
-      issuer: "Microsoft",
-      year: "2024",
-    },
-    {
-      title: "Data Analysis with Python",
-      issuer: "freeCodeCamp",
-      year: "2023",
-    },
-    {
-      title: "Belajar Analisis Data dengan Python",
-      issuer: "Dicoding",
-      year: "2023",
-    },
-    { title: "SQL (Advanced) Certificate", issuer: "HackerRank", year: "2023" },
-    {
-      title: "McKinsey Forward Program",
-      issuer: "McKinsey & Company",
-      year: "2024",
+      title: "Associate Data Scientist",
+      issuer: "Eduparx",
+      year: "2025",
     },
   ],
   marquee_words: [
